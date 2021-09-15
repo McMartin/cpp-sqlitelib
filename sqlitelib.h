@@ -26,7 +26,7 @@ void* enabler;
 
 inline void verify(int rc, int expected = SQLITE_OK) {
   if (rc != expected) {
-    throw std::exception();
+    throw std::runtime_error(sqlite3_errstr(rc));
   }
 }
 
@@ -155,7 +155,7 @@ class Iterator {
     } else if (rc == SQLITE_DONE) {
       id_ = -1;
     } else {
-      throw std::exception();  // TODO:
+      throw std::runtime_error(sqlite3_errstr(rc));
     }
     return *this;
   }
