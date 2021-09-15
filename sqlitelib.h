@@ -149,15 +149,11 @@ class Iterator {
   }
 
   Iterator& operator++() {
-    if (stmt_) {
-      auto rc = sqlite3_step(stmt_);
-      if (rc == SQLITE_ROW) {
-        ++id_;
-      } else if (rc == SQLITE_DONE) {
-        id_ = -1;
-      } else {
-        throw std::exception();  // TODO:
-      }
+    auto rc = sqlite3_step(stmt_);
+    if (rc == SQLITE_ROW) {
+      ++id_;
+    } else if (rc == SQLITE_DONE) {
+      id_ = -1;
     } else {
       throw std::exception();  // TODO:
     }
