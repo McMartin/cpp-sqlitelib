@@ -284,7 +284,7 @@ class Sqlite {
     }
   }
 
-  Sqlite(Sqlite&& rhs) : db_(rhs.db_) {}
+  Sqlite(Sqlite&& rhs) : db_(rhs.db_) { rhs.db_ = nullptr; }
 
   ~Sqlite() {
     if (db_) {
